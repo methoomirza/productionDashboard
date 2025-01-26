@@ -1,0 +1,8 @@
+pandas
+streamlit
+streamlit_shadcn_ui
+PIL
+seaborn
+matplotlib
+matplotlib.pyplot
+plotly.express
