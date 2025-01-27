@@ -15,8 +15,7 @@ pageTitle = ('<div style="font-family:sans-serif; color:Green; font-size: 42px; 
 st.markdown(pageTitle, unsafe_allow_html=True)
 # st.markdown(new_title, unsafe_allow_html=True)
 
-# data = conf.getLoadData("data/productionOrder-2024.xlsx")
-data = conf.getLoadData("https://github.com/methoomirza/productionDashboard/blob/main/data/productionOrder-2024.xlsx")
+data = conf.getLoadData("data/productionOrder-2024.xlsx")
 
 data['colorCodes'] = data['color'].map(getColorCodes)
 data['hexColor'] = data['colorCodes'].map(hexColors)
