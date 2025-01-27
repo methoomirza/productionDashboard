@@ -1,5 +1,6 @@
 pandas
 streamlit
+streamlit-shadcn-ui
 seaborn
 matplotlib
 plotly-express
