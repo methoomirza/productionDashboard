@@ -11,7 +11,7 @@ getColorCodes, hexColors, monthsName = conf.constVariables()
 st.set_page_config(page_title='Production Analysis')
 # st.header('Production Analysis Year 2024')
 
-pageTitle = ('<div style="font-family:sans-serif; color:Green; font-size: 42px; border:1px solid blue; border-radius:10px; padding:4px; margin-bottom:36px; display:flex; justify-content: center; align-items: center;">Production Analysis Year 2024</div>')
+pageTitle = ('<div style="font-family:sans-serif; color:Green; font-size: 42px; border:1px solid blue; border-radius:10px; padding:4px; display:flex; justify-content: center; align-items: center;">Production Analysis Year 2024</div><div style="margin-bottom:36px; color:#ccc; display:flex; justify-content: center; align-items: center;">By: Muhammad Shahid Mirza.</div>')
 st.markdown(pageTitle, unsafe_allow_html=True)
 # st.markdown(new_title, unsafe_allow_html=True)
 
@@ -28,24 +28,24 @@ monts = data['month'].unique().tolist()
 monthsNamelist = data['monthName'].unique().tolist()
 yearsList = data['year'].unique().tolist()
 leftCol, middleCol, rightCol = st.columns(3)
-leftCol2, middleCol2, rightCol2 = st.columns(3)
+# singleCol = st.columns(1)
 
- # =========== Top Summary Production - [ Metrics ]
+# =========== Top Summary Production - [ Metrics ]
 dataSummary = data.groupby(['category', 'unit'], dropna=True, as_index=False)['actual'].sum()
-#st.write(dataSummary)
 topWerkSummary = data[data['type'] == 'ShotBlast'].groupby(['category', 'type', 'unit'], dropna=True, as_index=False)['actual'].sum()
-topwerkLabel = st.expander("TopWerk\n(Interlock-(M2) + Kerbstone-(Nos)")
+#topwerkLabel = st.expander("TopWerk\n(Interlock-(M2) + Kerbstone-(Nos)")
 
+# ============== FIRST ROW ==============
 with leftCol:
     st.metric(
-        label='Interlocks - (Square Meter)',
+        label='Interlocks - (M2)',
         value = f"{dataSummary[dataSummary['category']=='Interlocks']['actual'].sum():,.0f}",
         delta = "REC/SQ/Uni Block",
         border=True
     )
 with middleCol:
     st.metric(
-        label='Kerbstone',
+        label='Kerbstone - (Nos)',
         # value=data[data['category'] == 'Kerbstone']['actual'].sum(),
         value = f"{dataSummary[dataSummary['category']=='Kerbstone']['actual'].sum():,.0f}",
         delta = "{Kerbstone / Tiles}",
@@ -59,9 +59,7 @@ with rightCol:
         # help='Interlock and Kerbstone',
         border=True
     )
-
-
-
+# ============== SECOND ROW ==============
 with leftCol:
     st.metric(
         label= "Cable Cover - (Nos)",
@@ -84,7 +82,15 @@ with rightCol:
         delta = "",
         border=True
     )
-
+# ============== THIRD ROW ==============
+# with singleCol[0]:
+#     st.metric(
+#         label= "TopWerk\n(Interlock/Kerbstone)",
+#         value = f"{topWerkSummary[topWerkSummary['category']=='Interlocks']['actual'].sum() + topWerkSummary[topWerkSummary['category']=='Kerbstone']['actual'].sum():,.0f}", 
+#         delta = f"{topWerkSummary[topWerkSummary['category']=='Interlocks']['actual'].sum()} / {topWerkSummary[topWerkSummary['category']=='Kerbstone']['actual'].sum()}", 
+#         # help='Interlock and Kerbstone',
+#         border=True
+#     )
 
 
 
@@ -226,43 +232,5 @@ with getTabs[1]:
                 )
     # st.write(dataFiltered)
 
-
-
-
-
-
-
-
-
-# ======== FOLLOWING CODE WITH TAB AND [ DROP DOWN SELECTION ] =====
-# mainCategory = ['Interlocks', 'Kerbstone']
-# cols = st.columns(len(mainCategory))
-# for x in range(0, len(mainCategory)):
-#     with cols[x]:
-#         ui.metric_card(title = mainCategory[x], content = dataRecord[dataRecord['category'] == mainCategory[x]]['actual'].sum(), 
-#                        description = dataRecord[dataRecord['category'] == mainCategory[x]]['unit'].unique()[0], 
-#                        key=mainCategory[x])
-
-
-# # tabs = st.tabs(['Category', 'Monthly'])
-# selectionFields = ['Category', 'Month', 'Type', 'Color', 'Thickness']
-# #filterData = ['category', 'monthName', 'type', 'color', 'tickness']
-
-# # --------- SELECTION FIELDS --------
-# selectedCriteria = st.selectbox("Select:", selectionFields)
-# if selectedCriteria == 'Month':
-#     criteriaFld = 'monthName'
-# elif selectedCriteria == 'Type':
-#     criteriaFld = 'type'
-# elif selectedCriteria == 'Color':
-#     criteriaFld = 'color'
-# elif selectedCriteria == 'Thickness':
-#     criteriaFld = 'thickness'
-# else:   criteriaFld = 'category'
-
-# # st.write(selectedCriteria)
-# filtered_data = (
-#     data.groupby(criteriaFld, as_index=False)['actual']
-#     .sum()
-# )
-# visualPlot(filtered_data, criteriaFld, 'actual', title="Products By Colors", xlabel='hexColor', plotOpt='ColorBarPlot')
+pageFooter = ('<div style="font-family:sans-serif; color:#ccc; font-size:14px; border-top:1px solid #ccc; padding:4px; margin-top:36px; display:flex; justify-content: center; align-items: center;">By: Muhammad Shahid Mirza</div>')
+st.markdown(pageFooter, unsafe_allow_html=True)
