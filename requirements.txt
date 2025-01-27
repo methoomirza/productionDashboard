@@ -1,6 +1,7 @@
 pandas
+openpyxl
 streamlit
+streamlit-shadcn-ui
 seaborn
 matplotlib
-matplotlib.pyplot
-plotly.express
+plotly-express

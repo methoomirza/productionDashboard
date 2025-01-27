@@ -45,43 +45,46 @@ with leftCol:
     )
 with middleCol:
     st.metric(
-        label= "TopWerk\n(Interlock/Kerbstone)",
-        value = f"{topWerkSummary[topWerkSummary['category']=='Interlocks']['actual'].sum() + topWerkSummary[topWerkSummary['category']=='Kerbstone']['actual'].sum():,.0f}", 
-        delta = f"{topWerkSummary[topWerkSummary['category']=='Interlocks']['actual'].sum()} / {topWerkSummary[topWerkSummary['category']=='Kerbstone']['actual'].sum()}", 
-        # help='Interlock and Kerbstone',
-        border=True
-    )
-with rightCol:
-    st.metric(
         label='Kerbstone',
         # value=data[data['category'] == 'Kerbstone']['actual'].sum(),
         value = f"{dataSummary[dataSummary['category']=='Kerbstone']['actual'].sum():,.0f}",
         delta = "{Kerbstone / Tiles}",
         border=True
     )
-
-
-with leftCol2:
+with rightCol:
     st.metric(
-        label='Cable Cover - (Nos)',
-        value = f"{dataSummary[dataSummary['category']=='Cable Cover']['actual'].sum():,.0f}",
-        delta = "",
+        label= "TopWerk\n(Interlock/Kerbstone)",
+        value = f"{topWerkSummary[topWerkSummary['category']=='Interlocks']['actual'].sum() + topWerkSummary[topWerkSummary['category']=='Kerbstone']['actual'].sum():,.0f}", 
+        delta = f"{topWerkSummary[topWerkSummary['category']=='Interlocks']['actual'].sum()} / {topWerkSummary[topWerkSummary['category']=='Kerbstone']['actual'].sum()}", 
+        # help='Interlock and Kerbstone',
         border=True
     )
-with middleCol2:
+
+
+
+with leftCol:
     st.metric(
-        label= "Heel Kerb - (No)",
-        value = f"{dataSummary[dataSummary['category']=='Heel Kerb']['actual'].sum():,.0f}", 
+        label= "Cable Cover - (Nos)",
+        value = f"{dataSummary[dataSummary['category']=='Cable Cover']['actual'].sum():,.0f}", 
         delta = "", 
         # help='Interlock and Kerbstone',
         border=True
     )
-with rightCol2:
+with middleCol:
     st.metric(
-        label='',
-        value = "",
+        label='Blocks - (M2)',
+        value = f"{dataSummary[dataSummary['category']=='Blocks']['actual'].sum():,.0f}",
         delta = "",
+        border=True
     )
+with rightCol:
+    st.metric(
+        label='Heel Kerb - (Nos)',
+        value = f"{dataSummary[dataSummary['category']=='Heel Kerb']['actual'].sum():,.0f}",
+        delta = "",
+        border=True
+    )
+
 
 
 
